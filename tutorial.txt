@@ -1,0 +1,13 @@
+1. VW05p_Enrichement:
+- Quy hoạch động tổng tiền tố: c[i][j]=c[i-1][j]+c[i][j-1]-c[i-1][j-1]+a[i][j]
+- Tổng 3x3: c[i][j]-c[i][j-3]-c[i-3][j]+c[i-3][j-3]
+
+2. VW04p_Checkout: 
+- Ta suy ra phương trình bậc 2 để tính vận tốc: (a1+a2)/(2*a1*a2)*x^2 + t*x - D = 0
+- Tham lam chọn V lớn nhất, đi đúng t giây với V
+
+3. VW07p_Vitamin:
+	- a[i]+=a[i-1] với i<n.
+	- Quy hoạch động với i<=n-1: d[x]=d[x-a[i-1]]+i+1, với x là tổng hiện tại và d[x] là min way.
+	- Với i=n: nếu ((MAXX-x-a[n-1])%a[n]==0) thì d[MAXX]=min(d[MAXX], d[x]+(MAXX-x-a[n-1])/a[n]+n)
+	- Kết quả là d[MAXX]-1.
