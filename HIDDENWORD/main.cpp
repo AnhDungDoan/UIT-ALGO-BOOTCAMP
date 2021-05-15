@@ -15,20 +15,20 @@ const int maxn = 100;
 
 struct trieNode
 {
-    trieNode* child[26];
+    trieNode* child[27];
     int cnt = 0;
     trieNode()
     {
-        F(i,0,25) child[i] = NULL;
+        F(i,0,26) child[i] = NULL;
     }
 };
 
 trieNode* root = new trieNode(); // root
 int n, m, q;
 
-void addNode(char tmp[])
+void addNode(string tmp)
 {
-    int l = strlen(tmp);
+    int l = tmp.size();
 
     trieNode* p = root;
     F(i,0,l-1)
@@ -41,9 +41,9 @@ void addNode(char tmp[])
     p->cnt++;
 }
 
-bool findTrie(char s[])
+bool findTrie(string s)
 {
-    int l = strlen(s);
+    int l = s.size();
     trieNode* p = root;
     F(i,0,l-1)
     {
@@ -58,6 +58,8 @@ bool findTrie(char s[])
 
 int main()
 {
+    freopen("input2.txt", "r", stdin);
+    freopen("ou.txt", "w", stdout);
     cin >> n >> m >> q;
     char a[n+10][m+10];
     F(i,1,n) F(j,1,m) cin >> a[i][j];
@@ -67,9 +69,9 @@ int main()
     {
         F(j,1,m)
         {
-            char tmp[10];
+            string tmp="";
             F(k,0,9)
-                if (j+k < 10) tmp[k] = a[i][j+k]; else break;
+                if (j+k <= m) tmp += a[i][j+k]; else break;
             addNode(tmp);
         }
     }
@@ -78,9 +80,10 @@ int main()
     {
         F(i,1,n)
         {
-            char tmp[10];
+            string tmp="";
+
             F(k,0,9)
-                if (i+k < 10) tmp[k] = a[i+k][j]; else break;
+                if (i+k <= n) tmp += a[i+k][j]; else break;
             addNode(tmp);
         }
 
@@ -89,9 +92,13 @@ int main()
 
     F(i,1,q)
     {
-        char s[11];
+        string s;
         cin >> s;
+        if (i == 78)
+            i =78;
         if (findTrie(s)) cout << "1"; else cout << "0";
     }
+    fclose(stdin);
+    //checkTF();
     return 0;
 }
